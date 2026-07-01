@@ -12,11 +12,11 @@ fn main() {
     println!("Part 2: {}", benchmark(|| part2(&input)));
 }
 
-fn part1(input: &str) -> usize {
+fn part1(input: &str) -> isize {
     input
         .chars()
         .map(|c| if c == '(' { 1isize } else { -1isize })
-        .sum::<isize>() as usize
+        .sum::<isize>()
 }
 
 fn part2(input: &str) -> usize {
@@ -32,5 +32,5 @@ fn part2(input: &str) -> usize {
         }
     }
 
-    0usize
+    0
 }
