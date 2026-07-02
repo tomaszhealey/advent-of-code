@@ -33,7 +33,7 @@ fn part1(input: &str) -> usize {
         visited.insert((pos.x, pos.y));
     }
 
-    visited.len() as usize
+    visited.len()
 }
 
 fn part2(input: &str) -> usize {
@@ -57,5 +57,5 @@ fn part2(input: &str) -> usize {
         visited.insert((pos.x, pos.y));
     }
 
-    visited.len() as usize
+    visited.len()
 }
