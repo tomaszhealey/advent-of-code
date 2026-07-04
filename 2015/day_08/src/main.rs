@@ -27,7 +27,7 @@ fn part1(input: &str) -> usize {
 fn part2(input: &str) -> usize {
     let re = Regex::new(r"(?<x>\W)").unwrap();
     input.lines().map(|x| 
-        re.find_iter(x).collect::<Vec<_>>().len() + 2
+        re.find_iter(x).fold(0, |acc, _| acc + 1) + 2
     )
     .sum::<usize>()
 }
