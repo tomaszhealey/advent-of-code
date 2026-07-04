@@ -12,6 +12,28 @@ pub fn benchmark<T: Display>(target: impl FnOnce() -> T) -> String {
     format!("{output}, Elapsed: {:.2?}", elapsed)
 }
 
+pub fn benchmark_return<T: Display>(target: impl FnOnce() -> T) -> (T, String) {
+    use std::time::Instant;
+    let now = Instant::now();
+
+    let output = target();
+
+    let elapsed = now.elapsed();
+    (output, format!("Elapsed: {:.2?}", elapsed))
+}
+
+pub fn elapsed<T>(target: impl FnOnce() -> T, msg: &str) -> T {
+    use std::time::Instant;
+    let now = Instant::now();
+
+    let output = target();
+
+    let elapsed = now.elapsed();
+    println!("{msg}, Elapsed: {:.2?}", elapsed);
+
+    output
+}
+
 #[cfg(test)]
 mod tests {
     use std::{thread, time::Duration};
