@@ -1,14 +1,15 @@
 use benchmarker::benchmark;
-use std::{collections::HashMap, env, fs, hash::Hash};
+use std::{collections::HashMap, env, fs};
 
 fn main() {
     let file_path = env::args()
         .nth(1)
         .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
-    let solver = Solver::new(input.trim_end());
+    let mut solver = Solver::new(input.trim_end());
 
     println!("Part 1: {}", benchmark(|| solver.part1()));
+    println!("Part 2: {}", benchmark(|| solver.part2()));
 }
 
 struct Solver<'a> {
@@ -41,9 +42,9 @@ impl Solver<'_> {
 
     fn part2(&mut self) -> isize {
         self.graph.insert("me", HashMap::new());
-        for key in self.graph.keys() {
-            self.graph.get_mut(key).insert("me", 0);
-            self.graph["me"].insert(key, 0);
+        for key in self.graph.clone().keys() {
+            self.graph.get_mut(key).unwrap().insert("me", 0);
+            self.graph.get_mut("me").unwrap().insert(key, 0);
         }
 
         self.part1()
