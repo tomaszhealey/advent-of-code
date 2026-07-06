@@ -34,10 +34,16 @@ impl Solver<'_> {
     }
 
     fn part1(&self) -> isize {
-        self.find_best(
-            &mut vec![""; self.graph.keys().len()],
-            self.graph.keys().map(|x| *x).collect(),
-        )
+        let mut table = vec![""; self.graph.keys().len()];
+        let first = self.graph.keys().next().unwrap();
+        table[0] = first;
+        let to_add = self
+            .graph
+            .keys()
+            .filter(|x| *x != first)
+            .map(|x| *x)
+            .collect();
+        self.find_best(&mut table, to_add)
     }
 
     fn part2(&mut self) -> isize {
@@ -50,8 +56,8 @@ impl Solver<'_> {
         self.part1()
     }
 
-    fn find_best<'a>(&self, table: &mut Vec<&'a str>, stack: Vec<&'a str>) -> isize {
-        if stack.len() == 0 {
+    fn find_best<'a>(&self, table: &mut Vec<&'a str>, to_add: Vec<&'a str>) -> isize {
+        if to_add.len() == 0 {
             let len = table.len();
             let mut acc = self.graph[table[0]][table[len - 1]] + self.graph[table[0]][table[1]];
             for i in 1..table.len() {
@@ -62,14 +68,14 @@ impl Solver<'_> {
         }
 
         let mut best = isize::MIN;
-        for next in 0..stack.len() {
-            let new: Vec<&str> = stack
+        for next in 0..to_add.len() {
+            let new: Vec<&str> = to_add
                 .clone()
                 .iter()
-                .filter(|x| **x != stack[next])
+                .filter(|x| **x != to_add[next])
                 .map(|x| *x)
                 .collect();
-            table[self.graph.len() - stack.len()] = stack[next];
+            table[self.graph.len() - to_add.len()] = to_add[next];
 
             let out = self.find_best(table, new);
             if out > best {
