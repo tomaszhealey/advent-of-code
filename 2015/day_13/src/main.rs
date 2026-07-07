@@ -37,13 +37,12 @@ impl Solver<'_> {
         let mut table = vec![""; self.graph.keys().len()];
         let first = self.graph.keys().next().unwrap();
         table[0] = first;
-        let to_add = self
-            .graph
-            .keys()
-            .filter(|x| *x != first)
-            .map(|x| *x)
-            .collect();
-        self.find_best(&mut table, to_add)
+
+        let mut to_add: Vec<&&str> = self.graph.keys().collect();
+        let index = to_add.iter().position(|x| *x == first).unwrap();
+        to_add.remove(index);
+
+        self.find_best(&mut table, to_add.iter().map(|x| **x).collect())
     }
 
     fn part2(&mut self) -> isize {
@@ -69,12 +68,10 @@ impl Solver<'_> {
 
         let mut best = isize::MIN;
         for next in 0..to_add.len() {
-            let new: Vec<&str> = to_add
-                .clone()
-                .iter()
-                .filter(|x| **x != to_add[next])
-                .map(|x| *x)
-                .collect();
+            let mut new = to_add.clone();
+            let index = new.iter().position(|x| *x == to_add[next]).unwrap();
+            new.remove(index);
+
             table[self.graph.len() - to_add.len()] = to_add[next];
 
             let out = self.find_best(table, new);

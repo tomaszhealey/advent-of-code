@@ -12,7 +12,7 @@ pub fn benchmark<T: Display>(target: impl FnOnce() -> T) -> String {
     format!("{output}, Elapsed: {:.2?}", elapsed)
 }
 
-pub fn benchmark_return<T: Display>(target: impl FnOnce() -> T) -> (T, String) {
+pub fn benchmark_return<T>(target: impl FnOnce() -> T) -> (T, String) {
     use std::time::Instant;
     let now = Instant::now();
 
