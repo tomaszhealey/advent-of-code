@@ -12,7 +12,7 @@ fn main() {
     println!("Part 2: {}", benchmark(|| part2(input)));
 }
 
-fn factors(mut num: usize) -> Vec<usize> {
+fn get_prime_factors(mut num: usize) -> Vec<usize> {
     let mut factors = vec![];
     while num % 2 == 0 {
         factors.push(2);
@@ -41,9 +41,8 @@ fn part1(target: usize) -> usize {
     let mut computed = HashSet::new();
     while presents < target {
         i += 2; // answer will be even
-        let factors = factors(i);
         presents = 0;
-        let pset = factors.into_iter().powerset();
+        let pset = get_prime_factors(i).into_iter().powerset();
         computed.clear();
 
         for set in pset {
@@ -64,9 +63,8 @@ fn part2(target: usize) -> usize {
     let mut computed = HashSet::new();
     while presents < target {
         i += 1;
-        let factors = factors(i);
         presents = 0;
-        let pset = factors.into_iter().powerset();
+        let pset = get_prime_factors(i).into_iter().powerset();
         computed.clear();
 
         for set in pset {
