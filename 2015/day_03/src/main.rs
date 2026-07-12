@@ -4,7 +4,7 @@ use std::{collections::HashSet, env, fs};
 fn main() {
     let file_path = env::args()
         .nth(1)
-        .unwrap_or_else(|| String::from("inputs/input.txt"));
+        .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
 
     println!("Part 1: {}", benchmark(|| part1(&input)));
