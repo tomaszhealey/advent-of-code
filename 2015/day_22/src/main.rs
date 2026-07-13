@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{
     collections::{HashMap, VecDeque},
     env, fs,
@@ -10,11 +10,11 @@ fn main() {
 
     println!(
         "Part 1: {}",
-        benchmark(|| run(boss_health, boss_damage, false))
+        Benchmark::new(|| run(boss_health, boss_damage, false))
     );
     println!(
         "Part 2: {}",
-        benchmark(|| run(boss_health, boss_damage, true))
+        Benchmark::new(|| run(boss_health, boss_damage, true))
     );
 }
 

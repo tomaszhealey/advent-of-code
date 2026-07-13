@@ -1,14 +1,14 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fmt::Display, fs};
 
 fn main() {
     let file_path = env::args()
         .nth(1)
-        .unwrap_or_else(|| String::from("inputs/input.txt"));
+        .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let input = input.trim_end();
 
-    println!("{}", benchmark(|| run(&input)));
+    println!("{}", Benchmark::new(|| run(&input)));
 }
 
 struct Output {

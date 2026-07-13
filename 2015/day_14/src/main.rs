@@ -1,4 +1,4 @@
-use benchmarker::benchmark_return;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 use Instruction::{Fly, Rest};
 
@@ -9,8 +9,8 @@ fn main() {
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let mut reindeer = parse(input.trim_end());
 
-    let ((part1, part2), elapsed) = benchmark_return(|| run(&mut reindeer));
-    println!("Part 1: {part1}\nPart 2: {part2}\n{elapsed}");
+    let (part1, part2) = Benchmark::elapsed("", || run(&mut reindeer));
+    println!("Part 1: {part1}\nPart 2: {part2}");
 }
 
 struct Reindeer {

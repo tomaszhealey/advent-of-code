@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 
 fn main() {
@@ -8,7 +8,10 @@ fn main() {
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let lights = parse(input.trim_end());
 
-    println!("Part 1: {}", benchmark(|| run(lights.clone(), 100, false)));
+    println!(
+        "Part 1: {}",
+        Benchmark::new(|| run(lights.clone(), 100, false))
+    );
 
     let mut part2 = lights.clone();
     let len = part2.len();
@@ -16,7 +19,7 @@ fn main() {
     part2[1][len - 2] = true;
     part2[len - 2][1] = true;
     part2[len - 2][len - 2] = true;
-    println!("Part 2: {}", benchmark(|| run(part2, 100, true)));
+    println!("Part 2: {}", Benchmark::new(|| run(part2, 100, true)));
 }
 
 fn parse(input: &str) -> Vec<Vec<bool>> {

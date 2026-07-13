@@ -1,21 +1,21 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashMap, env, fs};
 
 fn main() {
     let file_path = env::args()
         .nth(1)
-        .unwrap_or_else(|| String::from("inputs/input.txt"));
+        .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let input = input.trim_end();
 
     println!(
         "Part 1: {}",
-        benchmark(|| input.lines().fold(0, |acc, x| acc + part1(x)))
+        Benchmark::new(|| input.lines().fold(0, |acc, x| acc + part1(x)))
     );
 
     println!(
         "Part 2: {}",
-        benchmark(|| input.lines().fold(0, |acc, x| {
+        Benchmark::new(|| input.lines().fold(0, |acc, x| {
             if check_for_pair(x) && check_for_split_pair(x) {
                 acc + 1
             } else {

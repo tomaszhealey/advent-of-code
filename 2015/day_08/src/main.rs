@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use regex::Regex;
 use std::{env, fs};
 
@@ -9,8 +9,8 @@ fn main() {
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let input = input.trim_end();
 
-    println!("Part 1: {}", benchmark(|| part1(&input)));
-    println!("Part 2: {}", benchmark(|| part2(&input)));
+    println!("Part 1: {}", Benchmark::new(|| part1(&input)));
+    println!("Part 2: {}", Benchmark::new(|| part2(&input)));
 }
 
 fn part1(input: &str) -> usize {

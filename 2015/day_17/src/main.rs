@@ -1,5 +1,5 @@
-use benchmarker::benchmark_return;
 use itertools::Itertools;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 
 fn main() {
@@ -13,8 +13,8 @@ fn main() {
         .map(|x| x.parse::<usize>().unwrap())
         .collect::<Vec<_>>();
 
-    let ((part1, part2), elapsed) = benchmark_return(|| run(&containers));
-    println!("{elapsed}\nPart 1: {part1}\nPart 2: {part2}");
+    let (part1, part2) = Benchmark::elapsed("", || run(&containers));
+    println!("Part 1: {part1}\nPart 2: {part2}");
 }
 
 fn run(containers: &Vec<usize>) -> (usize, usize) {

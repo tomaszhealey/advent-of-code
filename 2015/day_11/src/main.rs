@@ -1,4 +1,4 @@
-use benchmarker::{benchmark, benchmark_return};
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashMap, env, fs, ops::RangeInclusive};
 
 fn main() {
@@ -9,9 +9,12 @@ fn main() {
     let input = input.trim_end();
     let mut solver = Solver::new();
 
-    let (result, elapsed) = benchmark_return(|| solver.get_next(&input));
-    println!("Part 1: {result}, {elapsed}");
-    println!("Part 2: {}", benchmark(|| solver.get_next(&result)));
+    let part1 = Benchmark::new(|| solver.get_next(&input));
+    println!("Part 1: {}", part1);
+    println!(
+        "Part 2: {}",
+        Benchmark::new(|| solver.get_next(part1.get_output()))
+    );
 }
 
 struct Solver {

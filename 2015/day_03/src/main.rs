@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashSet, env, fs};
 
 fn main() {
@@ -7,8 +7,8 @@ fn main() {
         .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
 
-    println!("Part 1: {}", benchmark(|| part1(&input)));
-    println!("Part 2: {}", benchmark(|| part2(&input)));
+    println!("Part 1: {}", Benchmark::new(|| part1(&input)));
+    println!("Part 2: {}", Benchmark::new(|| part2(&input)));
 }
 
 #[derive(Eq, PartialEq, Hash, Clone)]

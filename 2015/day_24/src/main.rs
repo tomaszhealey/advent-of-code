@@ -1,5 +1,5 @@
-use benchmarker::benchmark;
 use itertools::Itertools;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs, usize};
 
 fn main() {
@@ -13,8 +13,8 @@ fn main() {
         .map(|l| l.parse::<usize>().unwrap())
         .collect();
 
-    println!("Part 1: {}", benchmark(|| run(&weights, 3).unwrap()));
-    println!("Part 2: {}", benchmark(|| run(&weights, 4).unwrap()));
+    println!("Part 1: {}", Benchmark::new(|| run(&weights, 3).unwrap()));
+    println!("Part 2: {}", Benchmark::new(|| run(&weights, 4).unwrap()));
 }
 
 fn run(weights: &Vec<usize>, groups: usize) -> Option<usize> {

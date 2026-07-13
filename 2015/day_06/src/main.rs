@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 use InstructionType::{Off, On, Toggle};
 
@@ -11,12 +11,12 @@ fn main() {
 
     println!(
         "Part 1: {}",
-        benchmark(|| run(&input, |_| 1, |_| 0, |x| x ^ 1,))
+        Benchmark::new(|| run(&input, |_| 1, |_| 0, |x| x ^ 1,))
     );
 
     println!(
         "Part 2: {}",
-        benchmark(|| run(
+        Benchmark::new(|| run(
             &input,
             |x| x + 1,
             |x| if x > 0 { x - 1 } else { 0 },
@@ -80,9 +80,6 @@ fn parse_instructions(input: &str) -> Vec<Instruction> {
     instrs
 }
 
-//It would be more efficient to store the lights as ranges of lights.
-//However, the solution is sufficiently fast although memory inefficent.
-//I'm also unsure how I would implement part 2 with ranges.
 fn run(
     instrs: &Vec<Instruction>,
     on: impl Fn(u8) -> u8,

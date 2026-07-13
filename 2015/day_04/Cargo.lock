@@ -3,10 +3,6 @@
 version = 4
 
 [[package]]
-name = "benchmarker"
-version = "0.1.0"
-
-[[package]]
 name = "block-buffer"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -40,8 +36,8 @@ dependencies = [
 name = "day_04"
 version = "0.1.0"
 dependencies = [
- "benchmarker",
  "md-5",
+ "primitive-benchmarker",
 ]
 
 [[package]]
@@ -73,6 +69,12 @@ dependencies = [
  "cfg-if",
  "digest",
 ]
+
+[[package]]
+name = "primitive-benchmarker"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "19427a2f7c2c5ad49dfac7613ff967dd0e859105347397930f22e28df73cd4bc"
 
 [[package]]
 name = "typenum"

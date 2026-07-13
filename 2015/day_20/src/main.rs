@@ -1,5 +1,5 @@
-use benchmarker::benchmark;
 use itertools::Itertools;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashSet, env, fs};
 
 fn main() {
@@ -8,8 +8,8 @@ fn main() {
         .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let input = input.trim_end().parse::<usize>().unwrap();
-    println!("Part 1: {}", benchmark(|| part1(input)));
-    println!("Part 2: {}", benchmark(|| part2(input)));
+    println!("Part 1: {}", Benchmark::new(|| part1(input)));
+    println!("Part 2: {}", Benchmark::new(|| part2(input)));
 }
 
 fn get_prime_factors(mut num: usize) -> Vec<usize> {

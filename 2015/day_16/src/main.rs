@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashMap, env, fs};
 
 fn main() {
@@ -21,8 +21,8 @@ fn main() {
         ("perfumes", 1),
     ]);
 
-    println!("Part 1: {}", benchmark(|| part1(&aunties, &target)));
-    println!("Part 2: {}", benchmark(|| part2(&aunties, &target)));
+    println!("Part 1: {}", Benchmark::new(|| part1(&aunties, &target)));
+    println!("Part 2: {}", Benchmark::new(|| part2(&aunties, &target)));
 }
 
 fn parse(input: &str) -> Vec<HashMap<&str, usize>> {

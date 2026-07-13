@@ -1,4 +1,4 @@
-use benchmarker::{benchmark, benchmark_return, elapsed};
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashMap, env, fs};
 
 fn main() {
@@ -6,14 +6,17 @@ fn main() {
         .nth(1)
         .unwrap_or_else(|| String::from("input.txt"));
     let input = fs::read_to_string(file_path).expect("Error reading file.");
-    let input = elapsed(|| parse(&input), "Parsing");
+    let input = Benchmark::elapsed("Parsing", || parse(&input));
 
-    let (a, elapsed) = benchmark_return(|| get_reg("a", &input, &mut HashMap::new()));
-    println!("Part 1: {a}, {elapsed}");
+    let part1 = Benchmark::new(|| get_reg("a", &input, &mut HashMap::new()));
+    println!("Part 1: {}", part1);
 
     let mut regs = HashMap::new();
-    regs.insert("b", a);
-    println!("Part 2: {}", benchmark(|| get_reg("a", &input, &mut regs)));
+    regs.insert("b", *part1.get_output());
+    println!(
+        "Part 2: {}",
+        Benchmark::new(|| get_reg("a", &input, &mut regs))
+    );
 }
 
 fn parse(input: &str) -> HashMap<&str, Vec<&str>> {

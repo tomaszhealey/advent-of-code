@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{
     collections::{HashMap, VecDeque},
     env, fs, usize,
@@ -14,7 +14,7 @@ fn main() {
     //tts: Time to Survive
     println!(
         "Part 1: {}",
-        benchmark(|| find_gold(
+        Benchmark::new(|| find_gold(
             usize::MAX,
             &boss,
             &shop,
@@ -24,7 +24,7 @@ fn main() {
     );
     println!(
         "Part 2: {}",
-        benchmark(|| find_gold(
+        Benchmark::new(|| find_gold(
             0,
             &boss,
             &shop,

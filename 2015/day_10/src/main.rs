@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 
 fn main() {
@@ -8,9 +8,8 @@ fn main() {
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let input = input.trim_end();
 
-    println!("Part 1: {}", benchmark(|| solve(input, 40)));
-    //It would of course be better to print the 40th while finding the 50th
-    println!("Part 2: {}", benchmark(|| solve(input, 50)));
+    println!("Part 1: {}", Benchmark::new(|| solve(input, 40)));
+    println!("Part 2: {}", Benchmark::new(|| solve(input, 50)));
 }
 
 fn solve(input: &str, repeat: usize) -> usize {

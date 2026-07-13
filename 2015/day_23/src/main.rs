@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashMap, env, fs};
 use Instruction::{Hlf, Inc, Jie, Jio, Jmp, Tpl};
 
@@ -11,11 +11,11 @@ fn main() {
 
     println!(
         "Part 1: {}",
-        benchmark(|| run(&instructions, HashMap::from([("a", 0), ("b", 0)])))
+        Benchmark::new(|| run(&instructions, HashMap::from([("a", 0), ("b", 0)])))
     );
     println!(
         "Part 2: {}",
-        benchmark(|| run(&instructions, HashMap::from([("a", 1), ("b", 0)])))
+        Benchmark::new(|| run(&instructions, HashMap::from([("a", 1), ("b", 0)])))
     );
 }
 

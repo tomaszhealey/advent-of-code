@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{collections::HashSet, env, fs};
 
 fn main() {
@@ -8,8 +8,8 @@ fn main() {
     let input = fs::read_to_string(file_path).expect("Error reading file.");
     let mut solver = Solver::new(input.trim_end());
 
-    println!("Part 1: {}", benchmark(|| solver.part1()));
-    println!("Part 2: {}", benchmark(|| solver.part2()));
+    println!("Part 1: {}", Benchmark::new(|| solver.part1()));
+    println!("Part 2: {}", Benchmark::new(|| solver.part2()));
 }
 
 fn as_isize(input: &str) -> isize {

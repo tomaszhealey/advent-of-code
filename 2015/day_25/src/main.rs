@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 
 fn main() {
@@ -15,7 +15,7 @@ fn main() {
         nums[1].strip_suffix(".").unwrap().parse().unwrap(),
     );
 
-    println!("Part 1: {}", benchmark(|| get_code(row, col)));
+    println!("Part 1: {}", Benchmark::new(|| get_code(row, col)));
 }
 
 fn triangle_num(n: usize) -> usize {
