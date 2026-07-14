@@ -1,4 +1,4 @@
-use benchmarker::benchmark;
+use primitive_benchmarker::Benchmark;
 use std::{env, fs};
 
 fn main() {
