@@ -1,0 +1,8 @@
+[package]
+name = "day_07"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+fancy-regex = "0.18.0"
+primitive-benchmarker = "0.1.2"
