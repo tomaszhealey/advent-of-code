@@ -12,3 +12,9 @@ input/
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+#For C#
+/bin/
+/.vs/
+obj/
+bin/
